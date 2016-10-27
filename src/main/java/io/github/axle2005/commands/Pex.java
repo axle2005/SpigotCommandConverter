@@ -49,6 +49,19 @@ public class Pex implements CommandExecutor {
 					}
 				}
 			}
+			if (args.length == 4 && (args[2].equals("add")||args[2].equals("remove")) ) {
+				name = args[1];
+				{
+					if (args[2].equals("add")) {
+						command = "permissions user " + name + " permission " + args[3] + " true";
+						
+					}
+					else if(args[2].equals("remove")){
+						command = "permissions user " + name + " permission " + args[3] + " false";
+						
+					}
+				}
+			}
 			plugin.getLogger().info(command);
 			CommandResult r = Sponge.getCommandManager().process(Sponge.getServer().getConsole(), command);
 			return r;

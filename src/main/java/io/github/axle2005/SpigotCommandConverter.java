@@ -20,6 +20,8 @@ public class SpigotCommandConverter {
 	
 	@Listener
 	public void initialization(GameStartingServerEvent event) {
+		//Still needs economy
+		
 		new Register(this);
 	}
 	
