@@ -26,45 +26,45 @@ public class Pex implements CommandExecutor {
 		} else {
 			String name = "";
 			String group = "";
-			String command ="";
-			
+			String command = "permissions";
+
 			String[] args = arguments.getOne("remaining").toString().split(" ");
-			
-			//Create substrings to remove excess characters added. (9)
-			
-			args[args.length-1] = args[args.length-1].substring(0, args[args.length-1].length()-1);
-			if(args[0].equals("Optional[user"))
-			{
-				args[0] = "user";
-			}
-			else if(args[0].equals("Optional[group"))
-			{
-				args[0] = "group";
-			}
-			
-			if (args.length == 5 && args[2].equals("group")) {
-				name = args[1];
-				group = args[4];
-				{
-					if (args[3].equals("add") || args[3].equals("remove")) {
-						command = "permissions "+args[0]+" " + name + " parent " + args[3] + " " + group;
-						
+
+			// Create substrings to remove excess characters added. (9)
+			args[0] = args[0].substring(9);
+			args[args.length - 1] = args[args.length - 1].substring(0, args[args.length - 1].length() - 1);
+			if (args[0].equals("user") || args[0].equals("group")) {
+				if (args.length == 5 && args[2].equals("group")) {
+					name = args[1];
+					group = args[4];
+					{
+						if (args[3].equals("add") || args[3].equals("remove")) {
+							command.concat(" " + args[0] + " " + name + " parent " + args[3] + " " + group);
+
+						}
 					}
 				}
-			}
-			if (args.length == 4 && (args[2].equals("add")||args[2].equals("remove")) ) {
-				name = args[1];
-				{
-					if (args[2].equals("add")) {
-						command = "permissions "+args[0]+" " + name + " permission " + args[3] + " true";
-						
-					}
-					else if(args[2].equals("remove")){
-						command = "permissions "+args[0]+" " + name + " permission " + args[3] + " false";
-						
+				if (args.length == 4 && (args[2].equals("add") || args[2].equals("remove"))) {
+					name = args[1];
+					{
+						if (args[2].equals("add")) {
+							command.concat(" " + args[0] + " " + name + " permission " + args[3] + " true");
+
+						} else if (args[2].equals("remove")) {
+							command.concat(" " + args[0] + " " + name + " permission " + args[3] + " false");
+
+						}
 					}
 				}
+			} else {
+				String array = "";
+				command = "permissions";
+				for (String e : args) {
+					array.concat(" " + e);
+				}
+				command.concat(array);
 			}
+
 			plugin.getLogger().info(command);
 			CommandResult r = Sponge.getCommandManager().process(Sponge.getServer().getConsole(), command);
 			return r;
