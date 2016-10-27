@@ -9,22 +9,19 @@ import com.google.inject.Inject;
 
 import io.github.axle2005.commands.Register;
 
-
-
 @Plugin(id = "spigotcommandconverter", name = "SpigotCommandConverter", version = "0.0.1")
 public class SpigotCommandConverter {
 
-
 	@Inject
 	private Logger log;
-	
+
 	@Listener
 	public void initialization(GameStartingServerEvent event) {
-		//Still needs economy
-		
+		// Still needs economy
+
 		new Register(this);
 	}
-	
+
 	public Logger getLogger() {
 		return log;
 	}
