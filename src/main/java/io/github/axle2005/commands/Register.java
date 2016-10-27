@@ -15,8 +15,15 @@ public class Register {
 						// GenericArguments.onlyOne(GenericArguments.string(Text.of("group|user"))),
 						GenericArguments.remainingJoinedStrings(Text.of("remaining")))
 				.executor(new Pex(plugin)).build();
+		
+		CommandSpec eco = CommandSpec.builder().permission("totaleconomy.command.adminpay").description(Text.of("Spigot Eco Command"))
+				.arguments(
+						// GenericArguments.onlyOne(GenericArguments.string(Text.of("group|user"))),
+						GenericArguments.remainingJoinedStrings(Text.of("<give|take><player><amount>")))
+				.executor(new Pex(plugin)).build();
 
 		Sponge.getCommandManager().register(plugin, pex, "scc", "pex");
+		Sponge.getCommandManager().register(plugin, eco, "eco");
 
 	}
 }
