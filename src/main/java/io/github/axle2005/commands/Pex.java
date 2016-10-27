@@ -39,7 +39,7 @@ public class Pex implements CommandExecutor {
 					group = args[4];
 					{
 						if (args[3].equals("add") || args[3].equals("remove")) {
-							command.concat(" " + args[0] + " " + name + " parent " + args[3] + " " + group);
+							command="permissions " + args[0] + " " + name + " parent " + args[3] + " " + group;
 
 						}
 					}
@@ -48,10 +48,10 @@ public class Pex implements CommandExecutor {
 					name = args[1];
 					{
 						if (args[2].equals("add")) {
-							command.concat(" " + args[0] + " " + name + " permission " + args[3] + " true");
+							command="permissions " + args[0] + " " + name + " permission " + args[3] + " true";
 
 						} else if (args[2].equals("remove")) {
-							command.concat(" " + args[0] + " " + name + " permission " + args[3] + " false");
+							command="permissions " + args[0] + " " + name + " permission " + args[3] + " false";
 
 						}
 					}
