@@ -8,10 +8,6 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-
-import com.google.common.base.Optional;
-
 import io.github.axle2005.SpigotCommandConverter;
 
 public class Pex implements CommandExecutor {
@@ -35,16 +31,23 @@ public class Pex implements CommandExecutor {
 			String[] args = arguments.getOne("remaining").toString().split(" ");
 			
 			//Create substrings to remove excess characters added. (9)
-			args[0] = args[0].substring(3);
-			args[args.length-1] = args[args.length-1].substring(0, args[args.length-1].length()-1);
 			
+			args[args.length-1] = args[args.length-1].substring(0, args[args.length-1].length()-1);
+			if(args[0].equals("Optional[user"))
+			{
+				args[0] = "user";
+			}
+			else if(args[0].equals("Optional[group"))
+			{
+				args[0] = "group";
+			}
 			
 			if (args.length == 5 && args[2].equals("group")) {
 				name = args[1];
 				group = args[4];
 				{
 					if (args[3].equals("add") || args[3].equals("remove")) {
-						command = "permissions user " + name + " parent " + args[3] + " " + group;
+						command = "permissions "+args[0]+" " + name + " parent " + args[3] + " " + group;
 						
 					}
 				}
@@ -53,11 +56,11 @@ public class Pex implements CommandExecutor {
 				name = args[1];
 				{
 					if (args[2].equals("add")) {
-						command = "permissions user " + name + " permission " + args[3] + " true";
+						command = "permissions "+args[0]+" " + name + " permission " + args[3] + " true";
 						
 					}
 					else if(args[2].equals("remove")){
-						command = "permissions user " + name + " permission " + args[3] + " false";
+						command = "permissions "+args[0]+" " + name + " permission " + args[3] + " false";
 						
 					}
 				}
